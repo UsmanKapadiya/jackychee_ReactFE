@@ -74,10 +74,10 @@ composer audit                # must report no advisories
 ```
 Add the scheduler to cron (it prunes expired admin tokens):
 ```
-* * * * * cd /home/USER/api.jackychee.com && php artisan schedule:run >> /dev/null 2>&1
+* * * * * cd /home/USER/backend.jackychee.com && php artisan schedule:run >> /dev/null 2>&1
 ```
 
-**cPanel:** create a sub-domain such as `api.jackychee.com` with its **document root set to `backend/public`**. Only `public/` may be web-accessible, never the project root.
+**cPanel:** create a sub-domain such as `backend.jackychee.com` with its **document root set to `backend/public`**. Only `public/` may be web-accessible, never the project root.
 
 ### Tests
 ```bash
@@ -91,14 +91,14 @@ The tests cover public endpoints, admin authentication, the login rate limit, HT
 
 ```bash
 cd frontend
-cp .env.example .env          # VITE_API_URL=https://api.jackychee.com/api/v1
+cp .env.example .env          # VITE_API_URL=https://backend.jackychee.com/api/v1
 npm install
 npm run dev                   # http://localhost:5173
 npm run build                 # production files in dist/
 npm audit --omit=dev
 ```
 Upload the **contents of `dist/`** to the website's `public_html`. The bundled `.htaccess` handles React routing, old WordPress URLs and security headers.
-If your API domain is not `api.jackychee.com`, change it in the `Content-Security-Policy` line of `frontend/public/.htaccess`, then rebuild.
+If your API domain is not `backend.jackychee.com`, change it in the `Content-Security-Policy` line of `frontend/public/.htaccess`, then rebuild.
 
 ---
 
@@ -106,7 +106,7 @@ If your API domain is not `api.jackychee.com`, change it in the `Content-Securit
 
 ```bash
 cd admin
-cp .env.example .env          # VITE_API_URL=https://api.jackychee.com/api/v1
+cp .env.example .env          # VITE_API_URL=https://backend.jackychee.com/api/v1
                               # VITE_SITE_URL=https://jackychee.com
 npm install
 npm run dev                   # http://localhost:5174
