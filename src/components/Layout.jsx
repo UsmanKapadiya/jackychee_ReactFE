@@ -14,6 +14,18 @@ export default function Layout() {
   const [filterOpen, setFilterOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  useEffect(() => {
+    if (!site?.logo_url) return;
+
+    let icon = document.querySelector('link[rel="icon"]');
+    if (!icon) {
+      icon = document.createElement('link');
+      icon.rel = 'icon';
+      document.head.appendChild(icon);
+    }
+    icon.href = site.logo_url;
+  }, [site?.logo_url]);
+
   // close menus whenever the page changes
   useEffect(() => {
     setMobileOpen(false);
